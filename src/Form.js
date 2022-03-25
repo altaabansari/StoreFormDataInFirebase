@@ -1,7 +1,7 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import styles from "./Form.module.css";
 import { db } from "./Firebase-config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDoc, setDoc } from "firebase/firestore";
 const Form = () => {
   // ************ Reducer InitialValue***********************
   let initalvalue = {
@@ -23,7 +23,7 @@ const Form = () => {
     ],
     WorkExperience: [
       {
-        ResumeFile: "",
+        // ResumeFile: "",
         Experience: "",
         SalaryExpectation: 0,
       },
@@ -193,19 +193,20 @@ const Form = () => {
     }
   };
   // ************ useReducer define ***********************
+
   const [state, dispatch] = useReducer(reducer, initalvalue);
   // ************ Firebase Database Ref ***********************
   const dataref = collection(db, "users");
   // ************ submit Data ***********************
   const submit = async (e) => {
     e.preventDefault();
+
+    await addDoc(collection(db, "users"), state);
+    // await setDoc(collection(db, "users"), state);
   };
+
   console.log(state);
-  let newObj = { ...state };
-  console.log(newObj);
-  const btnclick = async () => {
-    await addDoc(dataref, newObj);
-  };
+
   return (
     <div className={styles.formContainer}>
       <form onSubmit={submit}>
@@ -350,14 +351,7 @@ const Form = () => {
         <fieldset>
           <legend>Work Experience</legend>
           <label htmlFor="resume">Upload Your Resume: </label>
-          <input
-            required
-            type="file"
-            id="resume"
-            onChange={(e) =>
-              dispatch({ type: "resumeFile", payload: e.target.files[0] })
-            }
-          />
+
           <br />
           <select
             required
@@ -410,7 +404,7 @@ const Form = () => {
             }
           ></textarea>
         </fieldset>
-        <input type="submit" value="Submit" onClick={btnclick} />
+        <input type="submit" value="Submit" />
       </form>
     </div>
   );
