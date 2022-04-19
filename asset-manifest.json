@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/StoreFormDataInFirebase/static/css/main.abd64e84.css",
+    "main.js": "/StoreFormDataInFirebase/static/js/main.adeb359a.js",
+    "index.html": "/StoreFormDataInFirebase/index.html",
+    "main.abd64e84.css.map": "/StoreFormDataInFirebase/static/css/main.abd64e84.css.map",
+    "main.adeb359a.js.map": "/StoreFormDataInFirebase/static/js/main.adeb359a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.abd64e84.css",
+    "static/js/main.adeb359a.js"
+  ]
+}
